@@ -1,0 +1,86 @@
+<header>
+  <div class="container p-3">
+    <div class="row justify-content-between">
+      <div class="col-lg-2 d-flex justify-content-center">
+        <img
+          src="https://img.icons8.com/material-rounded/32/ffffff/move-by-trolley.png"
+        />
+        <h4 class="ml-2 mt-1 text-white text-center">Ecommerce</h4>
+      </div>
+      <div class="col-lg-6 my-2 my-lg-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <select name="type" class="custom-select" required>
+              <option selected>Filter</option>
+              <option value="name">By Name</option>
+              <option value="id">By Id</option>
+            </select>
+          </div>
+          <input
+            [type]="type == 'id' ? 'number' : 'text'"
+            class="form-control"
+            placeholder="Serach the product..."
+          />
+          <div class="input-group-append">
+            <button type="button" class="btn btn-warning" type="button">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center text-lg-right m-auto">
+        <div class="btn-group">
+          <button class="btn btn-light">
+            <i class="fa fa-shopping-cart"></i> Cart
+            <span class="badge badge-secondary">4</span>
+          </button>
+          <button class="btn btn-light">Orders</button>
+          <button class="btn btn-light">
+            <i class="fa fa-user"></i> Profile
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg py-0 navbar-light bg-light shadow-lg">
+    <div class="container">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Category <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Electronic</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Men</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Women</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
