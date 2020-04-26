@@ -1,0 +1,45 @@
+.setcursor {
+  cursor: pointer;
+}
+
+.setcursor:hover {
+  background-color: #1e1e1e;
+}
+
+/* feature ads */
+
+.features-ads {
+  padding: 50px 0;
+}
+
+.features-ads .single-features-ads {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.features-ads .single-features-ads.first {
+  margin-top: 39px;
+}
+
+.features-ads .single-features-ads.second {
+  margin-top: 8px;
+}
+
+.features-ads .single-features-ads img {
+  margin-bottom: 15px;
+}
+
+.features-ads .single-features-ads h4 {
+  color: #1e1e1e;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-bottom: 0;
+}
+
+.features-ads .single-features-ads p {
+  color: #727272;
+  font-size: 14px;
+  line-height: 27px;
+  font-weight: 500;
+}

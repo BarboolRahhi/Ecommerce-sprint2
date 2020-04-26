@@ -1,6 +1,16 @@
 a:hover {
   cursor: pointer;
 }
+
+.custom-card {
+  transition: transform 0.5s ease;
+}
+
+.custom-card:hover {
+  transform: scale(1.1);
+}
+
+/* footer css */
 .site-footer {
   background-color: #232f3e;
   padding: 45px 0 20px;
