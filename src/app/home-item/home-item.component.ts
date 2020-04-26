@@ -23,8 +23,6 @@ export class HomeItemComponent implements OnInit {
 
     this.productService.viewProductsByCat(101).subscribe((data)=>{
       this.products = data;
-      console.log(data);
-      
     }); 
   }
 
