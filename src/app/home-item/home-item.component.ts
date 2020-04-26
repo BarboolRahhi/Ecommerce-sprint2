@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../model/category';
+import { Product } from '../model/product';
+import { CategoryService } from '../service/category.service';
+import { ProductService } from '../service/product.service';
 
 @Component({
   selector: 'app-home-item',
@@ -7,9 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeItemComponent implements OnInit {
 
-  constructor() { }
+  private categories: Category[];
+  private products: Product[];
+
+  constructor(private categoryService: CategoryService, private productService: ProductService) { }
 
   ngOnInit() {
+    this.categoryService.viewCategories().subscribe((data)=>{
+      this.categories = data;
+    });
+
+    this.productService.viewProductsByCat(101).subscribe((data)=>{
+      this.products = data;
+      console.log(data);
+      
+    }); 
   }
 
 }
