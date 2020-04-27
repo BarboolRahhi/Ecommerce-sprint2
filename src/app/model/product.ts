@@ -8,6 +8,7 @@ export class Product {
   price: number;
   brandName: string;
   quantity: number;
+  overAllRating: number;
   category: Category;
   inventory: Retailer;
 
@@ -18,6 +19,7 @@ export class Product {
     price: number,
     brandName: string,
     quantity: number,
+    overAllRating: number,
     category: Category,
     inventory: Retailer
   ) {
@@ -27,6 +29,7 @@ export class Product {
     this.price = price;
     this.brandName = brandName;
     this.quantity = quantity;
+    this.overAllRating = overAllRating;
     this.category = category;
     this.inventory = inventory;
   }

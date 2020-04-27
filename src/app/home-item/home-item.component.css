@@ -9,7 +9,7 @@
 /* feature ads */
 
 .features-ads {
-  padding: 50px 0;
+  padding: 60px 0 40px 0;
 }
 
 .features-ads .single-features-ads {
@@ -17,20 +17,13 @@
   margin-bottom: 30px;
 }
 
-.features-ads .single-features-ads.first {
-  margin-top: 39px;
-}
-
-.features-ads .single-features-ads.second {
-  margin-top: 8px;
-}
-
 .features-ads .single-features-ads img {
   margin-bottom: 15px;
+  max-width: 84px;
 }
 
 .features-ads .single-features-ads h4 {
-  color: #1e1e1e;
+  color: #232f3e;
   font-size: 22px;
   font-weight: 700;
   line-height: 50px;

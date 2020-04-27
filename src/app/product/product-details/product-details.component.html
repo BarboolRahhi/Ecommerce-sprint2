@@ -1,3 +1,134 @@
-<p>
-  product-details works!
-</p>
+<div class="container p-4 mt-3 bg-white">
+  <div class="row" *ngIf="product">
+    <div class="col-md-6 order-2">
+      <img
+        src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
+        alt=""
+      />
+
+      <hr />
+
+      <div class="review">
+        <h4 class="text-dark mt-3"><strong>Customer Reviews</strong></h4>
+        <!-- review start -->
+        <div class="alert alert-info" *ngIf="errorReviewMessage">
+          {{ errorReviewMessage }}
+        </div>
+        <div class="border rounded px-3 pt-3" *ngFor="let pr of productReview">
+          <h6 class="">{{ pr.user.firstName }}</h6>
+          <span class="float-right">{{ pr.reviewDt }}</span>
+          <h6>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            {{ pr.rating }}/5
+          </h6>
+          <p>
+            {{ pr.review }}
+          </p>
+        </div>
+        <!-- review end -->
+      </div>
+
+      <!-- end review column -->
+
+      <div class="review-form p-4 bg-light mt-3 rounded">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Mesage</label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter review message"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Rating</label>
+            <select
+              class="form-control form-control-sm"
+              id="exampleFormControlSelect1"
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-danger">Send Review</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-6 mt-sm-3 order-0">
+      <div class="badge badge-warning p-1">{{ product.brandName }}</div>
+      <div class="d-inline-block ml-2 badge badge-danger p-1">
+        {{ product.category.categoryName }}
+      </div>
+      <h3 class="mt-2">{{ product.productName }}</h3>
+      <h6>
+        <i class="fa fa-star text-danger"></i>
+        <i class="fa fa-star text-danger"></i>
+        <i class="fa fa-star text-danger"></i>
+        <i class="fa fa-star text-danger"></i>
+        <i class="fa fa-star text-danger"></i>
+        {{ product.overAllRating > 0 ? product.overAllRating : "N.A" }}/5
+      </h6>
+      <h3>
+        <strong>Rs. {{ product.price }}</strong>
+      </h3>
+      <div class="btn btn-outline-success btn-sm">
+        In stock
+      </div>
+      <div class="d-inline-block ml-3">
+        Quantity Left
+        <span class="badge badge-dark">{{ product.quantity }}</span>
+      </div>
+      <h6 class="mt-3"><strong>Shipping: Rs 50.42 </strong></h6>
+      <p class="text-secondary">
+        Estimated Delivery: 5-7 days
+      </p>
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <button class="btn btn-danger btn-block">Buy Now</button>
+        </div>
+        <div class="col-md-6">
+          <button
+            class="btn btn-warning btn-block"
+            (click)="addToCart(product.productId)"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      <h5 class="text-dark mt-3"><strong>Product Decription</strong></h5>
+      <p>
+        {{ product.productInfo }}
+      </p>
+      <hr />
+      <h5 class="text-dark mt-3"><strong>Product Specificaton</strong></h5>
+      <div class="alert alert-info" *ngIf="errorSpecMessage">
+        {{ errorSpecMessage }}
+      </div>
+      <table class="table table-bordered mt-3" *ngIf="productSpec">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let ps of productSpec">
+          <tr>
+            <th>{{ ps.specName }}</th>
+            <td>{{ ps.specValue }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
