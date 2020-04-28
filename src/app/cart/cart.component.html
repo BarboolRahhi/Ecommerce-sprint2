@@ -1,3 +1,70 @@
-<p>
-  cart works!
-</p>
+<div class="container p-4 mt-3 bg-white">
+  <div class="alert alert-info" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  <div class="cart">
+    <!-- cart card start -->
+    <div class="col-md-12" *ngFor="let crt of cart">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{ crt.product.imageUrl }}" alt="" />
+        </div>
+        <div class="col-md-9">
+          <div class="badge badge-warning p-1">{{ crt.product.brandName }}</div>
+          <div class="d-inline-block ml-2 badge badge-danger p-1">
+            {{ crt.product.category.categoryName }}
+          </div>
+          <h3 class="mt-2">{{ crt.product.productName }}</h3>
+          <h6>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            {{
+              crt.product.overAllRating > 0 ? crt.product.overAllRating : "N.A"
+            }}/5
+          </h6>
+          <h3>
+            <strong>Rs. {{ crt.product.price }}</strong>
+          </h3>
+          <div class="btn btn-outline-success btn-sm">
+            In stock
+          </div>
+          <div class="d-inline-block ml-3">
+            Quantity Left
+            <span class="badge badge-dark">{{ crt.product.quantity }}</span>
+          </div>
+          <button
+            class="btn d-block mt-3 btn-danger btn-sm"
+            (click)="removeToCart(crt.cartProductId)"
+          >
+            Remove from Cart
+          </button>
+        </div>
+      </div>
+      <hr />
+    </div>
+
+    <!-- cart end -->
+  </div>
+
+  <!-- check out -->
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>
+          <strong>Total Price: Rs. {{ totalPrice }}</strong>
+        </h4>
+      </div>
+      <div class="col-md-4">
+        <h4>
+          <strong>Item: {{ cart.length }}</strong>
+        </h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-warning float-right">Proceed To Buy</button>
+      </div>
+    </div>
+  </div>
+</div>

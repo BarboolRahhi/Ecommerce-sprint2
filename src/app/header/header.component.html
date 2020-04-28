@@ -3,25 +3,26 @@
   <div class="container p-3">
     <div class="row justify-content-between">
       <div class="col-lg-2 d-flex justify-content-center">
-        <img src="../assets/logo.png" />
+        <img src="../assets/logo.png" routerLink="/home" />
         <!-- <h4 class="ml-2 mt-1 text-white text-center">Ecommerce</h4> -->
       </div>
       <div class="col-lg-6 my-2 my-lg-0">
         <div class="input-group">
-          <div class="input-group-prepend">
-            <select name="type" class="custom-select" required>
-              <option selected>Filter</option>
-              <option value="name">By Name</option>
-              <option value="id">By Id</option>
-            </select>
-          </div>
           <input
             [type]="type == 'id' ? 'number' : 'text'"
-            class="form-control"
+            name="query"
+            [(ngModel)]="searchQuery"
+            class="form-control d-inline-block"
             placeholder="Serach the product..."
           />
+
           <div class="input-group-append">
-            <button type="button" class="btn btn-warning" type="button">
+            <button
+              type="button"
+              class="btn btn-warning"
+              type="button"
+              (click)="search()"
+            >
               <i class="fa fa-search"></i>
             </button>
           </div>
@@ -29,9 +30,13 @@
       </div>
       <div class="col-lg-4 text-center text-lg-right m-auto">
         <div class="btn-group">
-          <button class="btn btn-light">
+          <button
+            class="btn btn-light"
+            routerLinkActive="active"
+            routerLink="/cart"
+          >
             <i class="fa fa-shopping-cart"></i> Cart
-            <span class="badge badge-secondary">4</span>
+            <span class="badge badge-secondary">{{ cartCount }}</span>
           </button>
           <button class="btn btn-light">Orders</button>
           <button class="btn btn-light">

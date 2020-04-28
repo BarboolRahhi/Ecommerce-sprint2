@@ -66,28 +66,27 @@
     <div
       class="col-lg-3 col-md-4 col-sm-6 p-2"
       *ngFor="let p of products | slice: 0:4"
+      (click)="showProductDetails(p.productId)"
     >
       <div class="card">
         <img
-          class="card-img-top vh-25"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
+          class="card-img-top card-img"
+          src="{{ p.imageUrl }}"
           alt="Card image cap"
         />
         <div class="px-3 mt-2">
           <h5 class="m-0">{{ p.productName }}</h5>
-          <p class="badge badge-warning">{{ p.brandName }}</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i>
-            {{ p.overAllRating }}/5
+          <p class="badge badge-warning mb-0">{{ p.brandName }}</p>
+          <p class="d-inline-block ml-2 mb-0 badge badge-info">
+            {{ p.category.categoryName }}
           </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. {{ p.price }}</span>
+          <div class="rating">
+            <p class="py-2 m-0">
+              <i class="fa fa-star text-warning" aria-hidden="true"></i>
+              {{ p.overAllRating > 0 ? p.overAllRating : "N.A" }}/5
+            </p>
           </div>
+          <h4 class="price-new text-danger">Rs. {{ p.price }}</h4>
         </div>
       </div>
     </div>
@@ -108,220 +107,33 @@
 
 <!-- Electronic products -->
 <div class="container pb-4 mt-4">
-  <h3 class="py-3"><strong>Electronic Product</strong></h3>
+  <h3 class="py-3"><strong>Best Selling Women Shirts</strong></h3>
   <div class="row justify-content-between">
     <!-- card start -->
-    <div class="col-md-3 p-2">
+    <div
+      class="col-lg-3 col-md-4 col-sm-6 p-2"
+      *ngFor="let p of womenproducts | slice: 0:4"
+      (click)="showProductDetails(p.productId)"
+    >
       <div class="card">
         <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
+          class="card-img-top card-img"
+          src="{{ p.imageUrl }}"
           alt="Card image cap"
         />
         <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
+          <h5 class="m-0">{{ p.productName }}</h5>
+          <p class="badge badge-warning mb-0">{{ p.brandName }}</p>
+          <p class="d-inline-block ml-2 mb-0 badge badge-info">
+            {{ p.category.categoryName }}
           </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
+          <div class="rating">
+            <p class="py-2 m-0">
+              <i class="fa fa-star text-warning" aria-hidden="true"></i>
+              {{ p.overAllRating > 0 ? p.overAllRating : "N.A" }}/5
+            </p>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card end -->
-
-    <div class="col-md-3 p-2">
-      <div class="card">
-        <img
-          class="card-img-top"
-          style="height: 200px;"
-          src="https://ae01.alicdn.com/kf/Hf5195cf5e8314adca5f18ffa7e578d99g/Light-Men-Walking-font-b-Shoes-b-font-font-b-Men-s-b-font-Trainers-Sport.jpg_220x220xz.jpg_.webp"
-          alt="Card image cap"
-        />
-        <div class="px-3 mt-2">
-          <h5 class="m-0">Men Walking Shoes</h5>
-          <p class="badge badge-warning">Niki</p>
-          <p class="mx-2 text-center my-0 d-inline-block">
-            <i class="fa fa-star text-warning" aria-hidden="true"></i> 4.5
-          </p>
-        </div>
-        <div class="bottom-wrap px-3 mb-2">
-          <a href="" class="btn btn-sm btn-primary float-right"
-            ><i class="fa fa-shopping-cart"></i
-          ></a>
-          <div class="price-wrap h5">
-            <span class="price-new">Rs. 1280</span>
-          </div>
+          <h4 class="price-new text-danger">Rs. {{ p.price }}</h4>
         </div>
       </div>
     </div>

@@ -30,4 +30,8 @@ export class ProductService {
       "http://localhost:8088/viewprodreview/" + pid
     );
   }
+
+  public searchProducts(query: string): Observable<any> {
+    return this.http.get<Review[]>("http://localhost:8088/search/" + query);
+  }
 }

@@ -11,6 +11,7 @@ a:hover {
 }
 
 /* footer css */
+
 .site-footer {
   background-color: #232f3e;
   padding: 45px 0 20px;
@@ -76,6 +77,7 @@ a:hover {
 @media (max-width: 991px) {
   .site-footer [class^="col-"] {
     margin-bottom: 30px;
+    margin-top: auto;
   }
 }
 @media (max-width: 767px) {

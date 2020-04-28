@@ -11,6 +11,7 @@ export class Product {
   overAllRating: number;
   category: Category;
   inventory: Retailer;
+  imageUrl: string;
 
   constructor(
     productId: number,

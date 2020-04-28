@@ -6,6 +6,12 @@
   background-color: #1e1e1e;
 }
 
+.card-img {
+  width: 100%;
+  height: 300px;
+  object-fit: scale-down;
+}
+
 /* feature ads */
 
 .features-ads {
