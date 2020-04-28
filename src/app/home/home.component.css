@@ -1,3 +1,7 @@
+.main-container {
+  min-height: 100vh;
+}
+
 a:hover {
   cursor: pointer;
 }
@@ -75,10 +79,10 @@ a:hover {
   margin: 0;
 }
 @media (max-width: 991px) {
-  .site-footer [class^="col-"] {
+  /* .site-footer [class^="col-"] {
     margin-bottom: 30px;
     margin-top: auto;
-  }
+  } */
 }
 @media (max-width: 767px) {
   .site-footer {
