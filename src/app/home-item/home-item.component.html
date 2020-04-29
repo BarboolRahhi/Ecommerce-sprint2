@@ -9,8 +9,7 @@
           <img src="assets/free-delivery.png" alt="" />
           <h4>Free shipping</h4>
           <p>
-            Fusce urna quam, euismod sit amet mollis quis, vestibulum quis
-            velit. Vesti bulum mal esuada aliquet libero viverra cursus.
+            Free Shipping starts now! No minimums. No coupon required.
           </p>
         </div>
       </div>
@@ -19,8 +18,7 @@
           <img src="assets/money-back.png" alt="" />
           <h4>100% Money back</h4>
           <p>
-            Urna quam, euismod sit amet mollis quis, vestibulum quis velit.
-            Vesti bulum mal esuada aliquet libero viverra cursus.
+            Get the Money Back Guarantee. Feel free to buy the product.
           </p>
         </div>
       </div>
@@ -29,8 +27,8 @@
           <img src="assets/customer-service.png" alt="" />
           <h4>Online support 24/7</h4>
           <p>
-            Urna quam, euismod sit amet mollis quis, vestibulum quis velit.
-            Vesti bulum mal esuada aliquet libero viverra cursus.
+            Our online support service are availablle for 24/7 hours for
+            customers.
           </p>
         </div>
       </div>
@@ -39,16 +37,16 @@
 </div>
 
 <!-- dispaly Category  -->
-<div class="container-fluid py-4 alert alert-info">
-  <div class="container">
+<div class="container-fluid py-4">
+  <div class="container py-3">
     <h3 class="mb-4"><strong>Top Categories</strong></h3>
     <div class="row">
       <div
-        class="setcursor col-sm-3 p-3 bg-white text-center border"
+        class="setcursor col-sm-3 p-3 bg-white border"
         *ngFor="let c of categories"
         (click)="showCategoryItem(c)"
       >
-        <h4>
+        <h4 class="text-capitalize">
           <i class="fa fa-gg-circle" aria-hidden="true"></i>
           {{ c.categoryName }}
         </h4>
@@ -58,13 +56,23 @@
 </div>
 <!-- Diplay category end -->
 
+<!-- ads start -->
+<div class="">
+  <img
+    style="max-height: 400px; max-width: 100%;"
+    src="https://images-eu.ssl-images-amazon.com/images/G/31/img19/2019/PC/Storage/Sept/Components_1500x300._CB448007999_.jpg"
+    alt=""
+  />
+</div>
+<!-- ads end -->
+
 <!-- Popular products -->
-<div class="container pb-4">
+<div class="container py-4">
   <h3 class="py-3"><strong>Popular Product</strong></h3>
   <div class="row justify-content-between">
     <!-- card start -->
     <div
-      class="col-lg-3 col-md-4 col-sm-6 p-2"
+      class="setcursor col-lg-3 col-md-4 col-sm-6 p-2"
       *ngFor="let p of products | slice: 0:4"
       (click)="showProductDetails(p.productId)"
     >
