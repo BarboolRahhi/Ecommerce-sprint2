@@ -31,7 +31,11 @@ export class ProductService {
     );
   }
 
+  public addReview(review: Review) {
+    return this.http.post("http://localhost:8088/addReview", review);
+  }
+
   public searchProducts(query: string): Observable<any> {
-    return this.http.get<Review[]>("http://localhost:8088/search/" + query);
+    return this.http.get<Product[]>("http://localhost:8088/search/" + query);
   }
 }

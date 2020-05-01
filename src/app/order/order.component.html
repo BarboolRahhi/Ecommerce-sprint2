@@ -1,3 +1,208 @@
-<p>
-  order works!
-</p>
+<div class="container p-4 mt-3 bg-white">
+  <div class="alert alert-info" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <!-- this code show when order is placed -->
+  <div class="col-md-6 m-auto" *ngIf="isOrderPlaced">
+    <div class="row justify-content-center">
+      <img src="assets/mark.png" alt="" />
+    </div>
+
+    <div class="alert alert-success text-center mt-3">
+      {{ successMessage }}
+    </div>
+    <button type="button" class="btn btn-warning" (click)="goToOrderDetails()">
+      Go To Order Details <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <!-- this code for buying a product -->
+  <div class="buy-product" *ngIf="!isOrderPlaced">
+    <!-- address -->
+
+    <div class="col-md-8 m-auto">
+      <div class="d-flex justify-content-between">
+        <h5 *ngIf="addresses">
+          <strong>{{
+            addresses.length > 0
+              ? "Choose your delivery address"
+              : "No delivery address found"
+          }}</strong>
+        </h5>
+        <button
+          type="button"
+          class="btn btn-warning btn-sm"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Add a New Address
+        </button>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">
+                Add a New Address
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #addressForm="ngForm" (ngSubmit)="addAddress()">
+                <div class="form-group mt-1">
+                  <label for="exampleInputEmail1">Mobile Number</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter your mobile number"
+                    name="mobileNumber"
+                    ngModel
+                    #no="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <label for="exampleInputEmail1">City</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter your city name"
+                    name="city"
+                    ngModel
+                    #city="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <label for="exampleInputEmail1">State</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter your state name"
+                    name="state"
+                    ngModel
+                    #state="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Pin Code</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                    name="pinCode"
+                    ngModel
+                    #pin="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Area</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Enter your Area, street, colony, landmark"
+                    name="area"
+                    ngModel
+                    #area="ngModel"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  [disabled]="!addressForm.valid"
+                  class="btn btn-block btn-warning text-dark mt-3"
+                >
+                  Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end address -->
+
+    <!-- show all adress -->
+
+    <div class="col-md-8 m-auto">
+      <div class="list-group my-3">
+        <a
+          class="list-group-item p-0"
+          [class.active]="active === i"
+          *ngFor="let address of addresses; let i = index"
+          (click)="setAddressToOrder(i, address)"
+        >
+          <div class="row my-2 m-0">
+            <div class="col-md-6">
+              <p class="m-0"><strong>City:</strong> {{ address.city }}</p>
+              <p class="m-0">
+                <strong>Mobile Number:</strong> {{ address.mobileNumber }}
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p class="m-0"><strong>State:</strong> {{ address.state }}</p>
+              <p class="m-0"><strong>PinCode:</strong> {{ address.pinCode }}</p>
+            </div>
+            <div class="col-md-12">
+              <p class="m-0"><strong>Area:</strong> {{ address.area }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- end all address -->
+
+    <div class="col-md-8 m-auto" *ngIf="!successMessage && cart.length > 0">
+      <!-- check out -->
+      <div class="row">
+        <div class="col-md-6">
+          <h4>
+            <strong>Total Price: Rs. {{ totalPrice }}</strong>
+          </h4>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            <strong>Item: {{ cart.length }}</strong>
+          </h4>
+        </div>
+        <div class="col-md-2">
+          <button
+            type="button"
+            class="btn btn-warning float-right"
+            (click)="addOrder()"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

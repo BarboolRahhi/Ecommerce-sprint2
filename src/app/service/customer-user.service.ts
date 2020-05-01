@@ -1,13 +1,18 @@
 import { Injectable } from "@angular/core";
+import * as jwt_decode from "jwt-decode";
 import { map } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { UserSignIn } from "../model/user-signin";
+import { UserSignUp } from "../model/user-signup";
+import { Address } from "../model/address";
 
 @Injectable({
   providedIn: "root",
 })
-export class UserService {
+export class CustomerUserService {
   constructor(private http: HttpClient) {}
+
+  private baseUrl = "http://localhost:8083/users/";
 
   isAuthorized(allowedRoles: string): boolean {
     // check if the list of allowed roles is empty, if empty, authorize the user to access the page
@@ -16,14 +21,14 @@ export class UserService {
     }
 
     // get token from local storage or state management
-    let userInfo: { userId: number; token: string } = JSON.parse(
+    let userInfo: { email: string; token: string } = JSON.parse(
       localStorage.getItem("currentUser")
     );
 
     if (userInfo == null) return false;
 
     // decode token to read the payload details
-    const decodeToken = "";
+    const decodeToken = jwt_decode(userInfo.token);
 
     // check if it was decoded successfully, if not the token is not valid, deny access
     if (!decodeToken) {
@@ -36,9 +41,8 @@ export class UserService {
   }
 
   public login(user: UserSignIn) {
-    console.log("login send");
     return this.http
-      .post("http://localhost:8083/login", user, { observe: "response" })
+      .post(this.baseUrl + "login", user, { observe: "response" })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -48,11 +52,20 @@ export class UserService {
       );
   }
 
-  public getUser() {
-    let userInfo: { userId: number; token: string } = JSON.parse(
-      localStorage.getItem("currentUser")
-    );
-    return this.http.get("http://localhost:8083/users/" + userInfo.userId);
+  public getUser(email: string) {
+    return this.http.get(this.baseUrl + email);
+  }
+
+  public createNewAccount(userSignUp: UserSignUp) {
+    return this.http.post(this.baseUrl + "signup", userSignUp);
+  }
+
+  public addAddress(address: Address) {
+    return this.http.post(this.baseUrl + "address", address);
+  }
+
+  public getAllUserAddress(email: string) {
+    return this.http.get<Address[]>(this.baseUrl + "address/" + email);
   }
 
   public logout() {

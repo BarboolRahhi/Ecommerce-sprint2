@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -16,7 +16,9 @@ import { ProductListComponent } from "./product/product-list/product-list.compon
 import { ProductDetailsComponent } from "./product/product-details/product-details.component";
 import { CartComponent } from "./cart/cart.component";
 import { OrderComponent } from "./order/order.component";
-import { HomeItemComponent } from './home-item/home-item.component';
+import { HomeItemComponent } from "./home-item/home-item.component";
+import { OrderDetailsComponent } from "./order-details/order-details.component";
+import { JwtInterceptor } from "./service/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -33,9 +35,18 @@ import { HomeItemComponent } from './home-item/home-item.component';
     CartComponent,
     OrderComponent,
     HomeItemComponent,
+    OrderDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,23 +1,25 @@
-import { UserSignUp } from "./user-signup";
+import { Product } from "./product";
+import { User } from "./user";
 
 export class Review {
-  prodRatingId: number;
+  //  prodRatingId: number;
   rating: number;
   review: string;
   reviewDt: string;
-  user: UserSignUp;
+  user: User;
+  product: Product;
 
   constructor(
-    prodRatingId: number,
     rating: number,
     review: string,
     reviewDt: string,
-    user: UserSignUp
+    user: User,
+    product: Product
   ) {
-    this.prodRatingId = prodRatingId;
     this.rating = rating;
     this.review = review;
     this.reviewDt = reviewDt;
     this.user = user;
+    this.product = product;
   }
 }

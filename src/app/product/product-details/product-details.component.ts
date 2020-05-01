@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { ProductService } from "src/app/service/product.service";
 import { Product } from "src/app/model/product";
 import { ActivatedRoute } from "@angular/router";
@@ -6,6 +6,8 @@ import { ProductSpec } from "src/app/model/productspec";
 import { Review } from "src/app/model/review";
 import { CartService } from "src/app/service/cart.service";
 import { Subscription } from "rxjs";
+import { NgForm } from "@angular/forms";
+import { User } from "src/app/model/user";
 
 @Component({
   selector: "app-product-details",
@@ -13,12 +15,17 @@ import { Subscription } from "rxjs";
   styleUrls: ["./product-details.component.css"],
 })
 export class ProductDetailsComponent implements OnInit {
+  @ViewChild("reviewForm") reviewForm: NgForm;
   private product: Product;
   private productSpec: ProductSpec[];
   private productReview: Review[];
   private errorReviewMessage: string;
   private errorSpecMessage: string;
   private cartItemCount: number = 0;
+  private inStock: boolean = true;
+  private productId: number;
+
+  private userInfo: { email: string; token: string };
 
   constructor(
     private productService: ProductService,
@@ -27,14 +34,17 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.userInfo = JSON.parse(localStorage.getItem("currentUser"));
+
     this.route.queryParams.subscribe((param) => {
       let pid = +param["pid"];
+      this.productId = pid;
       this.viewProductByProductId(pid);
       this.viewProductSpecByProductId(pid);
       this.viewProductReview(pid);
 
       // get current cart item count
-      this.cartService.viewCart("abc1@test.com").subscribe((data) => {
+      this.cartService.viewCart(this.userInfo.email).subscribe((data) => {
         this.cartItemCount = data.length;
         console.log(this.cartItemCount);
       });
@@ -43,7 +53,7 @@ export class ProductDetailsComponent implements OnInit {
 
   addToCart(pid: number) {
     this.cartService
-      .addToCart(this.product.productId, "abc1@test.com")
+      .addToCart(this.product.productId, this.userInfo.email)
       .subscribe(
         (response: { message: string }) => {
           console.log(response);
@@ -59,6 +69,7 @@ export class ProductDetailsComponent implements OnInit {
   viewProductByProductId(pid: number) {
     this.productService.viewProductById(pid).subscribe((data) => {
       this.product = data;
+      if (this.product.quantity <= 0) this.inStock = false;
       this.product.imageUrl = `assets/imgecom/${data.productId}.jpg`;
     });
   }
@@ -81,6 +92,27 @@ export class ProductDetailsComponent implements OnInit {
       },
       (err) => {
         this.errorReviewMessage = err.error.message;
+      }
+    );
+  }
+
+  addReview() {
+    let reviewFormValue = this.reviewForm.value;
+    let user = new User(this.userInfo.email);
+    let review = new Review(
+      reviewFormValue["rating"],
+      reviewFormValue["review"],
+      new Date().toDateString(),
+      user,
+      this.product
+    );
+    this.productService.addReview(review).subscribe(
+      (data) => {
+        console.log(data);
+        this.viewProductReview(this.productId);
+      },
+      (err) => {
+        console.log(err);
       }
     );
   }

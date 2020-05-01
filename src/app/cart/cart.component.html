@@ -50,7 +50,7 @@
   </div>
 
   <!-- check out -->
-  <div class="col-md-12">
+  <div class="col-md-12" *ngIf="cart != null && cart.length > 0">
     <div class="row">
       <div class="col-md-4">
         <h4>
@@ -63,7 +63,13 @@
         </h4>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-warning float-right">Proceed To Buy</button>
+        <button
+          class="btn btn-warning float-right"
+          (click)="proceedToBuy()"
+          [disabled]="cart.length <= 0"
+        >
+          Proceed To Buy
+        </button>
       </div>
     </div>
   </div>

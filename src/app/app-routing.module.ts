@@ -9,6 +9,10 @@ import { ProductListComponent } from "./product/product-list/product-list.compon
 import { ProductDetailsComponent } from "./product/product-details/product-details.component";
 import { HomeItemComponent } from "./home-item/home-item.component";
 import { CartComponent } from "./cart/cart.component";
+import { OrderComponent } from "./order/order.component";
+import { OrderDetailsComponent } from "./order-details/order-details.component";
+import { CustomerAuthorizationGuard } from "./service/customer-authorization.guard";
+import { RestrictUrlGuard } from "./service/restrict-url.guard";
 
 const routes: Routes = [
   {
@@ -25,7 +29,30 @@ const routes: Routes = [
           { path: "details", component: ProductDetailsComponent },
         ],
       },
-      { path: "cart", component: CartComponent },
+      {
+        path: "cart",
+        component: CartComponent,
+        canActivate: [CustomerAuthorizationGuard],
+        data: {
+          allowedRoles: "ROLE_USER",
+        },
+      },
+      {
+        path: "order",
+        component: OrderComponent,
+        canActivate: [CustomerAuthorizationGuard, RestrictUrlGuard],
+        data: {
+          allowedRoles: "ROLE_USER",
+        },
+      },
+      {
+        path: "order/details",
+        component: OrderDetailsComponent,
+        canActivate: [CustomerAuthorizationGuard],
+        data: {
+          allowedRoles: "ROLE_USER",
+        },
+      },
     ],
   },
   {

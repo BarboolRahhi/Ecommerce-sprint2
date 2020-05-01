@@ -38,7 +38,14 @@
             <i class="fa fa-shopping-cart"></i> Cart
             <span class="badge badge-secondary">{{ cartCount }}</span>
           </button>
-          <button class="btn btn-light">Orders</button>
+          <button
+            class="btn btn-light"
+            routerLinkActive="active"
+            routerLink="/order/details"
+          >
+            <i class="fa fa-shopping-bag"></i>
+            Orders
+          </button>
           <button class="btn btn-light">
             <i class="fa fa-user"></i> Profile
           </button>
@@ -78,7 +85,7 @@
             <a class="nav-link">Women</a>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" *ngIf="!isLogin">
           <li class="nav-item">
             <a
               class="nav-link"
@@ -93,6 +100,18 @@
               routerLinkActive="active"
               routerLink="/user/signup"
               >Sign Up</a
+            >
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLogin">
+          <li class="nav-item" *ngIf="userInfo != null">
+            <a class="nav-link active"
+              ><strong>{{ userName | uppercase }}, </strong></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logOut()"
+              ><i class="fa fa-sign-out"></i> Log Out</a
             >
           </li>
         </ul>

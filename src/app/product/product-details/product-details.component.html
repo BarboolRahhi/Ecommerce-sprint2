@@ -32,15 +32,19 @@
       <!-- end review column -->
 
       <div class="review-form p-4 bg-light mt-3 rounded">
-        <form>
+        <form #reviewForm="ngForm" (ngSubmit)="addReview()">
           <div class="form-group">
             <label for="exampleInputEmail1">Mesage</label>
             <input
-              type="email"
+              type="text"
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter review message"
+              name="review"
+              ngModel
+              #review="ngModel"
+              required
             />
           </div>
           <div class="form-group">
@@ -48,12 +52,16 @@
             <select
               class="form-control form-control-sm"
               id="exampleFormControlSelect1"
+              name="rating"
+              ngModel
+              #rating="ngModel"
+              required
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
             </select>
           </div>
           <button type="submit" class="btn btn-danger">Send Review</button>
@@ -78,8 +86,14 @@
       <h3>
         <strong>Rs. {{ product.price }}</strong>
       </h3>
-      <div class="btn btn-outline-success btn-sm">
-        In stock
+      <div
+        class="btn btn-sm"
+        [ngClass]="{
+          'btn-outline-success': inStock,
+          'btn-outline-danger': !inStock
+        }"
+      >
+        {{ inStock ? "In stock" : "Out of Stock" }}
       </div>
       <div class="d-inline-block ml-3">
         Quantity Left
@@ -96,6 +110,7 @@
         <div class="col-md-6">
           <button
             class="btn btn-warning btn-block"
+            [disabled]="!inStock"
             (click)="addToCart(product.productId)"
           >
             Add to Cart

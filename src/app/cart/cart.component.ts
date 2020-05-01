@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { CartService } from "../service/cart.service";
 import { Cart } from "../model/cart";
-import { Product } from "../model/product";
+import { OrderService } from "../service/order.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-cart",
@@ -13,14 +14,21 @@ export class CartComponent implements OnInit {
   private errorMessage: string;
   private totalPrice: number = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.viewToCart();
   }
 
   private viewToCart() {
-    this.cartService.viewCart("abc1@test.com").subscribe(
+    let userInfo: { email: string; token: string } = JSON.parse(
+      localStorage.getItem("currentUser")
+    );
+    this.cartService.viewCart(userInfo.email).subscribe(
       (data) => {
         this.cart = data;
         this.cart.forEach((crt) => {
@@ -50,5 +58,10 @@ export class CartComponent implements OnInit {
         this.errorMessage = err.error.message;
       }
     );
+  }
+
+  proceedToBuy() {
+    this.orderService.isBuying = true;
+    this.router.navigateByUrl("/order");
   }
 }

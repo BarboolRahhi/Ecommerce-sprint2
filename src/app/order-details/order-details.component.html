@@ -1,0 +1,86 @@
+<div class="container p-4 mt-3">
+  <div class="alert alert-info" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="alert alert-info" *ngIf="order == null">
+    No Order Details Present. GO AND BUY THE PRODUCT
+  </div>
+
+  <div class="order p-4 mb-4 bg-white" *ngFor="let orderItem of order">
+    <!-- cart card start -->
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="p-0">Order Id: {{ orderItem.orderId }}</h5>
+        <div class="row px-3">
+          <p class="mb-0 pb-0">
+            Order Status:
+            <span class="text-success">{{ orderItem.status }}</span>
+          </p>
+          <p class="ml-3 mb-0 pb-0">
+            Order Date: {{ orderItem.orderDate | date: "EE, MMMM dd yyyy" }}
+          </p>
+        </div>
+        <p class="pt-1">
+          Estimate delivery date:
+          <span class="text-info">{{ orderItem.deliveryDate }}</span>
+        </p>
+      </div>
+      <div class="col-md-6 ml-auto">
+        <button
+          *ngIf="orderItem.status != 'CANCELLED'"
+          class="btn btn-danger btn-sm d-inline-block float-right"
+          (click)="cancleOrder(orderItem.orderId)"
+        >
+          Cancle Order
+        </button>
+      </div>
+      <div class="col-md-12 mt-0" *ngIf="cart != null">
+        <div class="row">
+          <div class="col-md-4">
+            <h5>
+              <strong>Total Price: Rs. {{ orderItem.totalPrice }}</strong>
+            </h5>
+          </div>
+          <div class="col-md-4">
+            <h5>
+              <strong>Item: {{ orderItem.cart.length }}</strong>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="col-md-12" *ngFor="let crt of orderItem.cart">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{ crt.product.imageUrl }}" alt="" />
+        </div>
+        <div class="col-md-9">
+          <div class="badge badge-warning p-1">{{ crt.product.brandName }}</div>
+          <div class="d-inline-block ml-2 badge badge-danger p-1">
+            {{ crt.product.category.categoryName }}
+          </div>
+          <h3 class="mt-2">{{ crt.product.productName }}</h3>
+          <h6>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            <i class="fa fa-star text-danger"></i>
+            {{
+              crt.product.overAllRating > 0 ? crt.product.overAllRating : "N.A"
+            }}/5
+          </h6>
+          <h3>
+            <strong>Rs. {{ crt.product.price }}</strong>
+          </h3>
+        </div>
+      </div>
+      <hr />
+    </div>
+
+    <!-- cart end -->
+  </div>
+</div>
