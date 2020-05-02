@@ -54,11 +54,20 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   buyNow(pid: number) {
+    if (this.userInfo == null) {
+      alert("You cannot buy without account");
+      return;
+    }
+
     if (!this.isAddedToCart) this.addToCart(pid);
     this.router.navigateByUrl("/cart");
   }
 
   addToCart(pid: number) {
+    if (this.userInfo == null) {
+      alert("You cannot Add item into cart without account");
+      return;
+    }
     this.cartService
       .addToCart(this.product.productId, this.userInfo.email)
       .subscribe(
