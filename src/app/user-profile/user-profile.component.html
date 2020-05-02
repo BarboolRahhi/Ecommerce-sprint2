@@ -3,32 +3,26 @@
     {{ errorMessage }}
   </div>
 
-  <!-- this code show when order is placed -->
-  <div class="col-md-6 m-auto" *ngIf="isOrderPlaced">
-    <div class="row justify-content-center">
-      <img src="assets/mark.png" alt="" />
-    </div>
-
-    <div class="alert alert-success text-center mt-3">
-      {{ successMessage }}
-    </div>
-    <button type="button" class="btn btn-warning" (click)="goToOrderDetails()">
-      Go To Order Details <i class="fa fa-arrow-right"></i>
-    </button>
-  </div>
-
-  <!-- this code for buying a product -->
-  <div class="buy-product" *ngIf="!isOrderPlaced">
+  <!-- this code for user profile -->
+  <div class="user profile">
     <!-- address -->
 
     <div class="col-md-8 m-auto">
+      <h3 class="text-center"><strong>Account Details</strong></h3>
+      <hr />
+      <h5 class="mt-3">
+        <strong>{{ userName }}</strong>
+      </h5>
+      <p class="text-info">{{ email }}</p>
       <div class="d-flex justify-content-between">
         <h5 *ngIf="addresses">
-          <strong>{{
-            addresses.length > 0
-              ? "Choose your delivery address"
-              : "No delivery address found"
-          }}</strong>
+          <strong>
+            {{
+              addresses.length > 0
+                ? "Your delivery address"
+                : "No address found"
+            }}
+          </strong>
         </h5>
         <button
           type="button"
@@ -161,11 +155,9 @@
 
     <div class="col-md-8 m-auto">
       <div class="list-group my-3">
-        <a
+        <div
           class="list-group-item p-0"
-          [class.active]="active === i"
           *ngFor="let address of addresses; let i = index"
-          (click)="setAddressToOrder(i, address)"
         >
           <div class="row my-2 m-0">
             <div class="col-md-6">
@@ -181,36 +173,17 @@
             <div class="col-md-12">
               <p class="m-0"><strong>Area:</strong> {{ address.area }}</p>
             </div>
+            <button
+              class="btn btn-danger btn-sm ml-3 mt-2"
+              (click)="removeAddress(address.addressId)"
+            >
+              Remove address from list
+            </button>
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
     <!-- end all address -->
-
-    <div class="col-md-8 m-auto" *ngIf="!successMessage && cart.length > 0">
-      <!-- check out -->
-      <div class="row">
-        <div class="col-md-6">
-          <h4>
-            <strong>Total Price: Rs. {{ totalPrice }}</strong>
-          </h4>
-        </div>
-        <div class="col-md-4">
-          <h4>
-            <strong>Item: {{ cart.length }}</strong>
-          </h4>
-        </div>
-        <div class="col-md-2">
-          <button
-            type="button"
-            class="btn btn-warning float-right"
-            (click)="addOrder()"
-          >
-            Buy
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

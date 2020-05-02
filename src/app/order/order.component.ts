@@ -24,6 +24,7 @@ export class OrderComponent implements OnInit {
   private active: number;
   private deliveryAddress: Address;
   private isOrderPlaced: boolean = false;
+  private isSavingAddress: boolean = false;
 
   constructor(
     private orderService: OrderService,
@@ -50,6 +51,10 @@ export class OrderComponent implements OnInit {
       }
     );
 
+    this.getAllUserAddresses();
+  }
+
+  getAllUserAddresses() {
     // show addres to user
     this.userService.getAllUserAddress(this.userInfo.email).subscribe(
       (data) => {
@@ -67,6 +72,7 @@ export class OrderComponent implements OnInit {
   }
 
   addAddress() {
+    this.isSavingAddress = true;
     let formAddress = this.addressForm.value;
     let user = new User(this.userInfo.email);
     let address = new Address(
@@ -83,6 +89,10 @@ export class OrderComponent implements OnInit {
     this.userService.addAddress(address).subscribe(
       (response) => {
         console.log(response);
+        alert("Your New Addres is Saved");
+        this.addressForm.reset();
+        this.getAllUserAddresses();
+        this.isSavingAddress = false;
       },
       (err) => {
         console.log(err);

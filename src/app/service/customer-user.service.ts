@@ -68,6 +68,10 @@ export class CustomerUserService {
     return this.http.get<Address[]>(this.baseUrl + "address/" + email);
   }
 
+  public deleteAddress(addressId: number) {
+    return this.http.delete(this.baseUrl + "address/" + addressId);
+  }
+
   public logout() {
     localStorage.removeItem("currentUser");
   }

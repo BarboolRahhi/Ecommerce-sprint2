@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logOut() {
     this.userService.logout();
     this.isLogin = false;
+    this.cartService.setCartItemCount(0);
     this.router.navigateByUrl("/home");
   }
 

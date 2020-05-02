@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { ProductService } from "src/app/service/product.service";
 import { Product } from "src/app/model/product";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ProductSpec } from "src/app/model/productspec";
 import { Review } from "src/app/model/review";
 import { CartService } from "src/app/service/cart.service";
@@ -24,13 +24,15 @@ export class ProductDetailsComponent implements OnInit {
   private cartItemCount: number = 0;
   private inStock: boolean = true;
   private productId: number;
+  private isAddedToCart: boolean = false;
 
   private userInfo: { email: string; token: string };
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,12 +53,18 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  buyNow(pid: number) {
+    if (!this.isAddedToCart) this.addToCart(pid);
+    this.router.navigateByUrl("/cart");
+  }
+
   addToCart(pid: number) {
     this.cartService
       .addToCart(this.product.productId, this.userInfo.email)
       .subscribe(
         (response: { message: string }) => {
           console.log(response);
+          this.isAddedToCart = true;
           this.cartService.setCartItemCount(this.cartItemCount + 1);
           alert(response.message);
         },
@@ -89,6 +97,7 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.viewProductReview(pid).subscribe(
       (data) => {
         this.productReview = data;
+        this.errorReviewMessage = null;
       },
       (err) => {
         this.errorReviewMessage = err.error.message;
@@ -110,6 +119,7 @@ export class ProductDetailsComponent implements OnInit {
       (data) => {
         console.log(data);
         this.viewProductReview(this.productId);
+        this.reviewForm.reset();
       },
       (err) => {
         console.log(err);

@@ -24,8 +24,11 @@ export class CustomerAuthorizationGuard implements CanActivate {
     const isAuthorized = this.authorizationService.isAuthorized(allowedRoles);
 
     if (!isAuthorized) {
-      window.alert("You cannot visit this without login");
-      this.router.navigate(["/user/signin"]);
+      window.alert("You cannot visit this page without login");
+      //this.router.navigate(["/user/signin"]);
+      this.router.navigate(["/user/signin"], {
+        queryParams: { returnUrl: state.url },
+      });
     }
     return true;
   }

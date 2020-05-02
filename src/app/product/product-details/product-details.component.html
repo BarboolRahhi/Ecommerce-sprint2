@@ -31,7 +31,12 @@
 
       <!-- end review column -->
 
-      <div class="review-form p-4 bg-light mt-3 rounded">
+      <div class="alert alert-info" *ngIf="!userInfo">
+        You Cannot give review without account. Please Go and
+        <a routerLink="/user/signup">Create a new Account</a> Or
+        <a routerLink="/user/signin">Login</a>
+      </div>
+      <div class="review-form p-4 bg-light mt-3 rounded" *ngIf="userInfo">
         <form #reviewForm="ngForm" (ngSubmit)="addReview()">
           <div class="form-group">
             <label for="exampleInputEmail1">Mesage</label>
@@ -105,7 +110,12 @@
       </p>
       <div class="row mt-3">
         <div class="col-md-6">
-          <button class="btn btn-danger btn-block">Buy Now</button>
+          <button
+            class="btn btn-danger btn-block"
+            (click)="buyNow(product.productId)"
+          >
+            Buy Now
+          </button>
         </div>
         <div class="col-md-6">
           <button

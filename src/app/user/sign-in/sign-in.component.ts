@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { CustomerUserService } from "src/app/service/customer-user.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 
 @Component({
@@ -11,17 +11,25 @@ import { NgForm } from "@angular/forms";
 export class SignInComponent implements OnInit {
   @ViewChild("f") logInForm: NgForm;
   error: string;
+  returnUrl: string;
 
-  constructor(private service: CustomerUserService, private router: Router) {}
+  constructor(
+    private service: CustomerUserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"];
+    console.log(this.returnUrl);
+  }
 
   signIn() {
-    console.log(this.logInForm.value);
     this.service.login(this.logInForm.value).subscribe(
       (res) => {
         console.log(res.status);
         this.router.navigateByUrl("home");
+        //this.router.navigate([this.returnUrl]);
       },
       (err) => {
         console.log(err.status);

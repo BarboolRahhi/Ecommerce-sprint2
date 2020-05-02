@@ -13,6 +13,7 @@ import { OrderComponent } from "./order/order.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { CustomerAuthorizationGuard } from "./service/customer-authorization.guard";
 import { RestrictUrlGuard } from "./service/restrict-url.guard";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
 
 const routes: Routes = [
   {
@@ -25,8 +26,16 @@ const routes: Routes = [
         path: "product",
         component: ProductComponent,
         children: [
-          { path: "list", component: ProductListComponent },
-          { path: "details", component: ProductDetailsComponent },
+          {
+            path: "list",
+            component: ProductListComponent,
+            canActivate: [CustomerAuthorizationGuard],
+          },
+          {
+            path: "details",
+            component: ProductDetailsComponent,
+            canActivate: [CustomerAuthorizationGuard],
+          },
         ],
       },
       {
@@ -48,6 +57,14 @@ const routes: Routes = [
       {
         path: "order/details",
         component: OrderDetailsComponent,
+        canActivate: [CustomerAuthorizationGuard],
+        data: {
+          allowedRoles: "ROLE_USER",
+        },
+      },
+      {
+        path: "profile",
+        component: UserProfileComponent,
         canActivate: [CustomerAuthorizationGuard],
         data: {
           allowedRoles: "ROLE_USER",

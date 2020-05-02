@@ -1,5 +1,6 @@
 import { UserSignUp } from "./user-signup";
 import { Cart } from "./cart";
+import { Address } from "./address";
 
 export class Order {
   orderId: string;
@@ -10,6 +11,7 @@ export class Order {
   cart: Cart[];
   totalPrice: number;
   deliveryDate: string;
+  address: Address;
 
   constructor(
     orderId: string,

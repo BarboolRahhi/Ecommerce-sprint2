@@ -19,6 +19,7 @@ import { OrderComponent } from "./order/order.component";
 import { HomeItemComponent } from "./home-item/home-item.component";
 import { OrderDetailsComponent } from "./order-details/order-details.component";
 import { JwtInterceptor } from "./service/jwt.interceptor";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { JwtInterceptor } from "./service/jwt.interceptor";
     OrderComponent,
     HomeItemComponent,
     OrderDetailsComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
