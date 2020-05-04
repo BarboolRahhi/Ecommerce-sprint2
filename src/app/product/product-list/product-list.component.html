@@ -10,7 +10,7 @@
       *ngFor="let p of products"
       (click)="showProductDetails(p.productId)"
     >
-      <div class="card">
+      <div class="card box">
         <img class="card-img-top" src="{{ p.imageUrl }}" alt="Card image cap" />
         <div class="px-3 mt-2">
           <h5 class="m-0">{{ p.productName }}</h5>

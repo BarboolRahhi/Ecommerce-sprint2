@@ -68,7 +68,7 @@
 
 <!-- Popular products -->
 <div class="container py-4">
-  <h3 class="py-3"><strong>Popular Product</strong></h3>
+  <h3 class="py-3"><strong>Popular Men Shirt</strong></h3>
   <div class="row justify-content-between">
     <!-- card start -->
     <div
@@ -76,7 +76,7 @@
       *ngFor="let p of products | slice: 0:4"
       (click)="showProductDetails(p.productId)"
     >
-      <div class="card">
+      <div class="card box">
         <img
           class="card-img-top card-img"
           src="{{ p.imageUrl }}"
@@ -123,7 +123,7 @@
       *ngFor="let p of womenproducts | slice: 0:4"
       (click)="showProductDetails(p.productId)"
     >
-      <div class="card">
+      <div class="card box">
         <img
           class="card-img-top card-img"
           src="{{ p.imageUrl }}"

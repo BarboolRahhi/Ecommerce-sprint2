@@ -35,7 +35,7 @@ export class CustomerUserService {
       console.log("Invalid token");
       return false;
     }
-
+    //  ROLE_ADMIN -> routing == ROLE_USER -> token
     // check if the user roles is in the list of allowed roles, return true if allowed and false if not allowed
     return allowedRoles.includes(decodeToken["role"]);
   }
